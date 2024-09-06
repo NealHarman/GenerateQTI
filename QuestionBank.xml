@@ -1,0 +1,2510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="exam.xsl"?>
+<exam>
+    <block><level>1</level><question>
+        What is the difference between ``System.out.println`` and ``System.out.print`` when printing text?
+
+        <answers>
+            <alternate>There is no difference.</alternate>
+            <alternate>You need to use ``System.out.print`` to print text - ``System.out.println`` will *only* print a newline.</alternate>
+            <alternate>``System.out.print`` is not actually syntactically correct Java - you have to use ``System.out.println``.</alternate>
+            <alternate correct="yes">``System.out.println`` prints a newline at the end of the text and ``System.out.print`` does not.</alternate>
+            <alternate>``System.out.println`` is for printing text and ``System.out.print`` for printing numbers.</alternate>
+        </answers>
+    </question></block>
+    <block><level>1</level><question>
+        What is a *condition* in Java?
+
+        <answers>
+            <alternate>A message from the compiler telling you what you need to change to fix your code.</alternate>
+            <alternate>An alternative name for ``boolean``.</alternate>
+            <alternate correct="yes">A logical expression that can be true or false.</alternate>
+            <alternate>A message from the style checker telling you what you need to change to fix your code.</alternate>
+            <alternate>The general name for if statements and loops.</alternate>
+        </answers>
+    </question></block>
+    <block><level>1</level><question>
+        What of the following statements about variable declarations is correct?
+
+        <answers>
+            <alternate>You should declare all variables at the start of the program.</alternate>
+            <alternate correct="yes">You should declare variables as close as possible to the point you use them.</alternate>
+            <alternate>It is good practice to declare as many variables on one line as possible.</alternate>
+            <alternate>It is not possible to declare a variable and give it a value at the same time.</alternate>
+            <alternate>It is good practice to declare variables but you do not have to - Java will work out what you mean if you don't.</alternate>
+        </answers>
+    </question></block>
+    <block><level>2</level><question>
+        Which of the following statements about parameters passed to methods is false?
+
+        <answers>
+            <alternate>Parameters are copies of the original value so any changes made to them inside a method will be lost when the method returns.</alternate>
+            <alternate>Because complex data (arrays, array lists etc.) is represented by *references* to the actual data, even though
+                they are passed to methods as copies, the data they refer to can still be changed.</alternate>
+            <alternate>Because parameters are passed as copies, even though a method cannot change the value stored in a parameter after that method has returned,
+                it is possible to change the value of that copy within the method just as if it was a local variable.</alternate>
+            <alternate>If the value of a parameter is not changed within a method, you can mark it as ``final``.</alternate>
+            <alternate correct="yes">Parameters are copies of the original value but any changes to them that are made inside a method are copied back to the original value that was passed.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- Question Block -->
+    <block><level>2</level><question>
+        This question and the next one apply to the following code:
+        ```
+        int[] array = {1, 2, 3, 4};
+
+        ArrayList&lt;Integer> arrayList = new ArrayList&lt;>();
+
+        for(int elt: array) {
+        arrayList.add(0, elt);
+        }
+        ```
+        What is the content of ``arrayList`` after this code is executed?
+
+        <answers>
+            <alternate correct="yes">4, 3, 2, 1.</alternate>
+            <alternate>1, 2, 3, 4.</alternate>
+            <alternate>The code does not compile because you cannot call a variable ``arrayList``.</alternate>
+            <alternate>4</alternate>
+            <alternate>1</alternate>
+        </answers>
+    </question>
+        <question>
+            A programmer rewrites the loop in the code above:
+            ```
+            for(int i = 0; i  &lt; array.length; i++) {
+            arrayList.add(i, array[i]);
+            }
+            ```
+            Which of the statements below is correct?
+
+            <answers>
+                <alternate>The code won't compile because the first argument to the ``add`` operation must be a constant.</alternate>
+                <alternate>The code will crash because it should be ``for(int i = 1; i &lt;= array.length; i++) {``</alternate>
+                <alternate>The code will do exactly the same as it did before.</alternate>
+                <alternate>The code will repeatedly overwrite the previous value added, so only the very last value will be stored in the ``ArrayList``.</alternate>
+                <alternate correct="yes">Data will be stored in ``arrayList`` in the opposite order to the previous question.</alternate>
+            </answers>
+        </question></block>
+
+    <!-- End Question Block -->
+
+    <!-- Question Block -->
+    <block><level>2</level><question>
+        This and the following 2 questions are about this code which inserts a new value into an integer array:
+        ```
+        public static int[] insertNumber(int[] array, int location, int val) {
+        for (int i = array.length - 1; i > location; i--) {
+        array[i] = array[i - 1];
+        }
+        array[location] = val;
+        return array;
+        }
+        ```
+        To insert new data into an array, the existing data needs to be moved to make a space - which is what the
+        for loop does. Why does it count down and not up?
+
+        <answers>
+            <alternate>It could just as easily count up - it does not matter.</alternate>
+            <alternate>Because new data it more likely to be added near the end of the array, it's usually quicker to count down than up.</alternate>
+            <alternate correct="yes">Counting up would overwrite the data we need to move.</alternate>
+            <alternate>Counting down means there is no chance of trying to write data after the end of the array, which would cause Java to crash.</alternate>
+            <alternate>None of the above is the reason.</alternate>
+        </answers>
+    </question>
+        <question>
+            Suppose we create an array:
+            ```
+            int[] array = {1, 2, 3, 4};
+            ```
+            What is in the array ``array`` after running the code:
+            ```
+            array = insertNumber(array, 2, 11);
+            ```
+            <answers>
+                <alternate>The array still contains 1, 2, 3, 4 because method parameters cannot be changed.</alternate>
+                <alternate>The code will crash because there is only space for four items in the array and we are trying to add a fifth.</alternate>
+                <alternate>1, 2, 11, 3, 4</alternate>
+                <alternate correct="yes">1, 2, 11, 3</alternate>
+                <alternate>1, 11, 2, 3</alternate>
+            </answers>
+        </question>
+        <question>
+            Suppose we call the code above with location set to -2. What happens when the code is run?
+
+            <answers>
+                <alternate correct="yes">The code crashes with an ``ArrayIndexOutOfBoundsException`` with the value -1.</alternate>
+                <alternate>The code crashes with an ``ArrayIndexOutOfBoundsException`` with the value -2.</alternate>
+                <alternate>The array is unchanged.</alternate>
+                <alternate>The new value is inserted at the start of the array.</alternate>
+                <alternate>None of the above.</alternate>
+            </answers>
+        </question></block>
+    <!-- End Question Block -->
+
+    <block><level>2</level><question>
+        This code:
+        ```
+        for (int i = 1; i &lt;= 5; i++) {
+        for (int j = 1; j &lt;= i; j++) {
+        System.out.print(j);
+        }
+        System.out.println();
+        }
+        ```
+        produces this output:
+        ```
+        1
+        12
+        123
+        1234
+        12345
+        ```
+        On the basis that it's possible to rewrite a for loop as a while loop (even if it might not always be good practice),
+        a programmer rewrites the code above:
+        ```
+        int i = 1;
+        int j = 1;
+        while(i &lt;= 5) {
+        while (j &lt;= i) {
+        System.out.print(j);
+        j++;
+        }
+        System.out.println();
+        i++;
+        }
+        ```
+        However, the code now produces the output below - why?
+        ```
+        1
+        2
+        3
+        4
+        5
+        ```
+        <answers>
+            <alternate>It is not actually possible to rewrite for loops as while loops.</alternate>
+            <alternate>While loops automatically increment loop counters, so the statements ``i++;`` and ``j++`` are not necessary and incorrect.</alternate>
+            <alternate>If you use while loops like this, you need to start counting from zero not one.</alternate>
+            <alternate correct='yes'>The variable ``j`` is declared in the wrong place.</alternate>
+            <alternate>The variable ``i`` is declared in the wrong place.</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>2</level><question>
+        Assuming the variable ``day`` has been correctly declared and initialised,
+        consider the following fragments of code - which of the statements below is false?
+        ```
+        /* I */
+        switch(day) {
+        case "Monday":
+        case "Tuesday":
+        case "Thursday":
+        case "Friday":
+        System.out.println("The length of the teaching day is 9 hours");
+        break;
+        case "Wednesday":
+        System.out.println("The length of the teaching day is 5 hours");
+        break;
+        case "Saturday":
+        case "Sunday":
+        System.out.println("The length of the teaching day is 0 hours");
+        break;
+        default:
+        System.out.println("Error");
+        break;
+        }
+        ```
+
+        ```
+        /* II */
+        int dayLen = switch(day) { //see Option E below
+        case "Monday", "Tuesday", "Thursday", "Friday" -> 9;
+        case "Wednesday" -> 5;
+        case "Saturday", "Sunday" -> 0;
+        default -> -1;
+        }; //see option E below
+        if (dayLen >= 0) {
+        System.out.println("The length of the teaching day is " + dayLen + " hours");
+        } else {
+        System.out.println("Error");
+        }
+        ```
+        <answers>
+            <alternate>I and II both do exactly the same thing and are correct, legal Java.</alternate>
+            <alternate>Both I and II can be rewritten using if statements.</alternate>
+            <alternate correct='yes'>Both I and II have multiple cases for each alternative option - which is not legal in Java.</alternate>
+            <alternate>The ``break`` statement after the ``default`` statement in I is not strictly necessary but is good practice.</alternate>
+            <alternate>In II it is possible to rewrite ``if (dayLen >= 0) {..`` by replacing ``dayLen`` with the entire switch expression (starting ``switch(day) {...`` and ending ``}`` - both marked "see Option E below" in the code). However, this would probably make the code much harder to read.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <block><level>3</level><question>
+        What happens to the following code if ``itemCount`` is zero?
+        ```
+        if (itemCount > 0 &amp;&amp; total / itemCount > minimum) {
+        System.out.println("The average is above the minimum value.");
+        } else {
+        System.out.println("The average is at or below the minimum value.");
+        }
+        ```
+        <answers>
+            <alternate>It will crash because ``total / itemCount > minimum`` will cause a divide by zero error.</alternate>
+            <alternate correct="yes">It will print *The average is at or below the minimum value.* because Java won't try to calculate ``total / itemCount > minimum`` if ``itemCount`` is not greater than zero.</alternate>
+            <alternate>The condition will be true and it will print *The average is above the minimum value.*</alternate>
+            <alternate>Because of the division by zero in ``total / itemCount > minimum`` it will skip the whole statement and not print anything.</alternate>
+            <alternate>Java does not specify in which order it computes conditions so it will either work correctly and print *The average is at or below the minimum value.* if ``itemCount > 0`` is checked first; or it will crash if ``total / itemCount > minimum`` is checked first.</alternate>
+        </answers>
+    </question></block>
+    <block><level>1</level><question>
+        Which of the following statements most accurately describes checking if two strings ``string1`` and
+        ``string2`` are equal?
+
+        <answers>
+            <alternate>You should check they are equal like this: ``string1 == string2``.</alternate>
+            <alternate>You should check they are equal like this: ``string1 = string2``.</alternate>
+            <alternate correct="yes">You should check them like this: ``string1.equals(string2)`` or like this: ``string2.equals(string1)``. Using ``==`` *may* work but it is not correct and you cannot rely on it.</alternate>
+            <alternate>You should check they are equal like this: ``string1.equals(string2)`` - using ``==`` or ``string2.equals(string1)`` will not work.</alternate>
+            <alternate>You should check they are equal like this: ``string2.equals(string1)`` - using ``==`` or ``string1.equals(string2)`` will not work.</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>1</level><question>
+        Consider the code fragments I and II below - which of the following statements is most correct?
+        ```
+        boolean myCondition = ... ///something that is either true or false
+
+        /* I */
+        if (myCondition) {
+        //...some code
+        }
+
+        /* II */
+        if (myCondition == true) {
+        //...some code
+        }
+        ```
+        <answers>
+            <alternate>Both code fragments do the same thing, either style will work and either style is acceptable.</alternate>
+            <alternate correct="yes">Both code fragments do the same thing, either style will work but generally style I is preferred.</alternate>
+            <alternate>Both code fragments do the same thing, either style will work but generally style II is preferred.</alternate>
+            <alternate>The code in I is not correct as the value of ``myCondition`` is not being compared to anything, so this will not compile.</alternate>
+            <alternate>Both code fragments do the same thing but II will be slower because it is longer.</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>2</level><question>
+        The value stored in ``val`` after the following code is executed is 2.0000000000000004 - why?
+        ```
+        double val = Math.sqrt(2) * Math.sqrt(2);
+        ```
+        <answers>
+            <alternate>The value of ``Math.sqrt(2)`` is 1.0000000000000002.</alternate>
+            <alternate>The value of ``Math.sqrt(2) * Math.sqrt(2)`` causes an arithmetic overflow - you should make ``val`` a ``float`` instead of a ``double``.</alternate>
+            <alternate>The correct result of this should be 2 - which is an integer, so you should make ``val`` an ``int`` instead of a ``double``.</alternate>
+            <alternate>2.0000000000000004 is mathematically the correct result of the square of the squareroot of 2.</alternate>
+            <alternate correct="yes">Only a finite number of possible numbers can be represented by ``double`` and ``Math.sqrt(2)`` is a recurring decimal which can only be approximated.</alternate>
+        </answers>
+    </question></block>
+    <block><level>2</level><question>
+        The Java constant (static final variable) ``Integer.MAX_VALUE`` is set to the maximum possible
+        value an integer variable in Java can store. The value stored in ``val`` after the following code
+        is executed is -2 - why?
+        ```
+        int val = Integer.MAX_VALUE + Integer.MAX_VALUE;
+        ```
+        <answers>
+
+            <alternate   correct="yes">This is because of arithmetic overflow as only finite integer values can be stored, and the result of this particular operation in that case produces an integer result of -2.</alternate>
+            <alternate>The value of ``Integer.MAX_VALUE`` is -1.</alternate>
+            <alternate>Because ``Integer.MAX_VALUE`` is already the largest integer value, Java will not let you add anything to it and the error code that is used when you try is -2.</alternate>
+            <alternate>You cannot directly use ``Integer.MAX_VALUE`` in arithmetic and when you do, the error code -1 is used - so if you try to add ``Integer.MAX_VALUE`` to itself you get -2.</alternate>
+            <alternate>This is because of arithmetic overflow because only finite integer values can be stored, and in cases of arithmetic overflow the error code of -2 is always used in Java.</alternate>
+            <alternate>The variable ``val`` is an ``int`` but ``Integer.MAX_VALUE`` is an ``Integer`` - the value -2 is the error code used when you try to mix ``int`` and ``Integer``.</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>1</level><question>
+        What is the result of executing the following code?
+        ```
+        int val = 5.0/3.0;
+        ```
+        <answers>
+            <alternate>1.67</alternate>
+            <alternate>1.6666667</alternate>
+            <alternate>1</alternate>
+            <alternate correct="yes">The code won't compile.</alternate>
+            <alternate>0</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>3</level><question>
+        What is the value stored in the variable ``val`` after the following code is executed?
+        ```
+        int val = 5;
+        val *= 3 + 4 - 7 % 3;
+        ```
+        <answers>
+            <alternate>``*=`` is not legal Java so this will not compile.</alternate>
+            <alternate correct='yes'>30</alternate>
+            <alternate>15</alternate>
+            <alternate>17</alternate>
+            <alternate>``%`` is not legal Java so this will not compile.</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>3</level><question>
+        What is the value stored in the variable ``output`` after the following code is executed?
+        ```
+        int val = 5;
+        int output = 3 * --val;
+        ```
+        <answers>
+            <alternate>15</alternate>
+            <alternate>The ``--`` operator can only be placed *after* a variable not before, so this will not compile.</alternate>
+            <alternate>The ``--`` operator can only be used on its own, not as part of a larger expression, so this will not compile.</alternate>
+            <alternate>3</alternate>
+            <alternate correct='yes'>12</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>1</level><question>
+        Which of the following is *not* a data type in Java?
+
+        <answers>
+            <alternate>int</alternate>
+            <alternate>String</alternate>
+            <alternate correct="yes">static</alternate>
+            <alternate>Scanner</alternate>
+            <alternate>char</alternate>
+        </answers>
+    </question></block>
+
+    <block><level>1</level><question>
+        Which of the following statements best describes how you should name the file containing the code
+        starting with the line below:
+        ```
+        public class SomeClass {...
+        ```
+        <answers>
+            <alternate>The file can have any name.</alternate>
+            <alternate>The file should be called ``SomeClass.class``.
+            </alternate>
+            <alternate correct='yes'>The file should be called ``SomeClass.java`` - some operating systems will ignore the case of the name, but it is good practice and safer to keep it the same as the name of the class.
+            </alternate>
+            <alternate>The file should be called ``SomeClass.java``, and it will not work *in any circumstances* if the case of the name is not correct.
+            </alternate>
+            <alternate>The file can have any name but only because the class is public - if it was not public, it would have to be called ``SomeClass.java``.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <block><level>1</level><question>
+        Which of the following statements accurately describes the difference between *reserved words*,
+        *identifiers*
+        and *literals*?
+
+
+        <answers>
+            <alternate correct='yes'>Reserved words are part of the language itself, and you cannot use these words for anything else (for example as identifiers); identifiers are names chosen by a programmer (either you or someone else); and literals are constant values that appear in the code as, for example, strings (in quotes) or numbers.
+            </alternate>
+            <alternate>Reserved words are part of the language itself, but you can also use these if you want to name identifers; identifiers are names chosen by a programmer (either you or someone else); and literals are constant values that appear in the code as, for example, strings (in quotes) or numbers.
+            </alternate>
+            <alternate>Reserved words are part of the language itself, and you cannot use these words for anything else (for example as identifiers); identifiers are names chosen by a programmer (either you or someone else); and literals are the results of arithmetic computations.
+            </alternate>
+            <alternate> Reserved words are part of the language itself, and you cannot use these words for anything else (for example as identifiers); identifiers are names chosen by you; and literals are constant values that appear in the code as, for example, strings (in quotes) or numbers.
+            </alternate>
+            <alternate>Reserved words are part of the language itself, and you cannot use these words for anything else (for example as identifiers); identifiers are names chosen by a programmer (either you or someone else); and literals are an alternative way of referring to reserved words.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- *** Pre 2023/24 Questions below*** -->
+
+    <!-- ***Question Block***-->
+    <block><level>1</level><question>
+        A programmer writes the following loop intending it to iterate 10 times - but it doesn't iterate at all.
+
+        ``
+        for(int i = 0; i == 10; i++) {
+        //...
+        }
+        ``
+        Which of the following do they need to do to fix it?
+
+        <answers>
+            <alternate>Move ``i++`` to inside the loop
+            </alternate>
+            <alternate correct='yes'>Change ``i == 10`` to ``i  &lt; 10``
+            </alternate>
+            <alternate>Change ``i == 10`` to ``i &lt;= 10``
+            </alternate>
+            <alternate>Change ``int i = 0`` to ``int i = 1``
+            </alternate>
+            <alternate>Rewrite it as a while loop</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        Which types of Java loop will execute the body of the loop once even when the condition
+        controlling the loop is initially false?
+
+
+        <answers>
+            <alternate>for loops.</alternate>
+            <alternate>Both for loops and do-while loops.</alternate>
+            <alternate correct='yes'>do-while loops.</alternate>
+            <alternate>while loops.</alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+    <block><level>1</level><question>
+        In Java a reserved word is a word that is part of the language. Which of the following is a reserved word?
+
+
+        <answers>
+            <alternate> ``args``
+            </alternate>
+            <alternate> ``ArrayList``
+            </alternate>
+            <alternate> ``main``
+            </alternate>
+            <alternate> ```System``
+            </alternate>
+            <alternate correct='yes'>None of these.</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>1</level><question>
+        Consider the following Java code:
+        ```
+        int accountBalance = 18000;
+        String message = "The balance of the account is:";
+        String result = message + accountBalance;
+        ```
+        Which of the following statements is true?
+
+        <answers>
+            <alternate>You cannot use the + operator on Strings so the declaration of result is a compiler error.
+            </alternate>
+            <alternate>You can use the + operator on Strings to join them, but the values on both the left and right need to be Strings so the declaration of result is a compiler error.
+            </alternate>
+            <alternate correct='yes'>If you mix Strings and numbers, the + operator will work and the value of result is "The balance of the account is:18000".
+            </alternate>
+            <alternate>To join a String and an integer using the + operator you need to force the integer to be a String, so you need to change the declaration of result to ``String result = message + (String) accountBalance;``.
+            </alternate>
+            <alternate>If you mix Strings and numbers, the + operator will work and the value of result is "Thebalanceoftheaccountis:18000".
+            </alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        Consider the following method:
+        ```
+        public void mysteryMethod(boolean a, boolean b){
+        if (a){
+        System.out.println("A");
+        } else if (a &amp;&amp; b){
+        System.out.println("A and B");
+        } else {
+        if (!b) {
+        System.out.println("not B");
+        } else {
+        System.out.println("???");
+        }
+        }
+        }
+        ```
+        And consider the following statements.
+        1. If ``a`` and ``b`` are both true, it will print out "A and B".
+        1. If ``a`` is true it will print out "A" regardless of the value of ``b``.
+        1. If ``b`` is true and ``a`` is false, it will print out "not B".
+        1. It will print out "???" if ``a`` is false and ``b`` is true.
+        1. It will never print out "A and B".
+
+
+        Which option below identifies ALL of the statements 1-5 above which are true?
+
+        <answers>
+            <alternate>1,3,5</alternate>
+            <alternate correct='yes'>2,4,5</alternate>
+            <alternate>1,4,5</alternate>
+            <alternate>2,3,5</alternate>
+            <alternate>1,3,4</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        What is the output of this code?
+        ```
+        double lemon = 1 + 5;
+        double orange = lemon/4;
+        int kiwi = 1 + 5;
+        int apple = kiwi/4;
+        System.out.println(orange + " " + apple);
+        ```
+        <answers>
+            <alternate>1 1</alternate>
+            <alternate correct='yes'>1.5 1</alternate>
+            <alternate>0 1</alternate>
+            <alternate>1.5 1.0</alternate>
+            <alternate>The code does not compile</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        Java programmers stick to conventions when writing the names of variables etc. Some of the following are
+        right and some are wrong.
+
+        1. ``accountBalance`` - a static final variable name.
+        1. ``countryOfOrigin`` - a normal variable name.
+        1. ``LANGUAGE_CODE``  - a static final variable name.
+        1. ``setAccountName`` - a method name.
+        1. ``BankAccount`` -a class name.
+        1. ``account_name`` - a normal variable name.
+
+
+        Which of the following statements about the list of variable and method names 1. - 6. above is true?
+
+        <answers>
+            <alternate correct='yes'>2,3,4 and 5 follow the conventions, the others do not.</alternate>
+            <alternate>1,3 and 5 follow the conventions, the others do not.</alternate>
+            <alternate>They all follow the conventions.</alternate>
+            <alternate>2,4 and 6 follow the conventions.</alternate>
+            <alternate>None of them follow the conventions.</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        A year is a leap year if it is divisible by 4, but NOT if it is also divisible by 100,
+        UNLESS it is additionally divisible by 400. So, for example, 2017 is not a leap year; 2016 is a leap year
+        (divisible by 4);
+        1900 is not a leap year (divisible by 4 but also by 100 and not by 400); and 2000 is a leap year (divisible
+        by 400).
+        Below are four ways to calculate if a year is a leap year, each of which is commented /* 1 */ - /* 4 */; not
+        all of them are correct.
+        ```
+        /* 1 */
+        if ((year % 400 == 0) ||
+        ((year % 4 == 0) &amp;&amp; !(year % 100 == 0))) {
+        System.out.println(year + " is a leap year");
+        } else {
+        System.out.println(year + " is NOT a leap year");
+        }
+
+        /* 2 */
+        if((year % 400 == 0) &amp;&amp;
+        ((year % 4 ==0 ) || !(year % 100 == 0))) {
+        System.out.println(year + " is a leap year");
+        } else         {
+        System.out.println(year + " is NOT a leap year");
+        }
+
+        /* 3 */
+        if (year % 400 == 0) {
+        System.out.println(year + " is a leap year");
+        } else if (year % 100 == 0) {
+        System.out.println(year + " is NOT a leap year");
+        } else if (year % 4 == 0) {
+        System.out.println(year + " is a leap year");
+        } else {
+        System.out.println(year + " is NOT a leap year");
+        }
+
+        /* 4 */
+        if (year % 4 == 0) {
+        System.out.println(year + " is a leap year");
+        } else if (year % 100 == 0) {
+        System.out.println(year + " is NOT a leap year");
+        } else if (year % 400 == 0) {
+        System.out.println(year + " is a leap year");
+        } else {
+        System.out.println(year + " is NOT a leap year");
+        }
+        ```
+        Which of the following identifies ALL the versions that correctly compute a leap year? Assume year has been
+        declared and initialised.
+
+
+        <answers>
+            <alternate>1,2,3</alternate>
+            <alternate>1,4</alternate>
+            <alternate>2,3,4</alternate>
+            <alternate correct='yes'>1,3</alternate>
+            <alternate>2,4</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        The following code shows an array of strings and five possible ways to print it out.
+        ```
+        String [] fruit = {"lemon", "orange",
+        "grapes", "pineapple"};
+
+        /* 1 */
+        for(int i = 0; i  &lt; fruit.length; i++){
+        System.out.println(fruit[i]);
+        }
+
+        /* 2 */
+        for(int i = 1; i &lt;= fruit.length; i++){
+        System.out.println(fruit[i]);
+        }
+
+        /* 3 */
+        for(String elem : fruit){
+        System.out.println(elem);
+        }
+
+        /* 4 */
+        for(int i = 0; i == fruit.length; i++){
+        System.out.println(fruit[i]);
+        }
+
+        /* 5 */
+        int i = 0;
+        while (i  &lt; fruit.length) {
+        System.out.println(fruit[i]);
+        i++;
+        }```
+        Which of the loops labelled /* 1 */ to /* 5 */ are correct in that they will work (but may not be best
+        practice)?
+
+
+        <answers>
+            <alternate correct='yes'>1,3,5</alternate>
+            <alternate>All of them</alternate>
+            <alternate>2</alternate>
+            <alternate>2,4,5</alternate>
+            <alternate>1,4</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        The program in this and the following two questions implements Bubble Sort which sorts things into order
+        by comparing pairs of items and swapping them if they are out of order. It keeps doing this until either (a)
+        it has done it so
+        many times that the results must be in order (which is what this version does); or (b) by keeping track of
+        whether it has stopped
+        swapping things (which means they must all be in order).
+        ```
+        public class BubbleTest {
+        public static void main(String[] args) {
+        int[] testList = {5,3,2,11,9,3,7,8};
+
+        System.out.println("Unsorted:");
+        for(int elem: testList){
+        System.out.println(elem);
+        }
+
+        bubble(testList);
+
+        System.out.println("Sorted:");
+        for(int elem: testList){
+        System.out.println(elem);
+        }
+        }
+
+        public static void bubble(int[] numList){
+
+        for(int i = 0; i  &lt; numList.length; i++){
+        for(int j = 0; j  &lt; numList.length-1; j++){
+        if (numList [j] >numList [j + 1]){
+        int temp = numList [j];
+        numList [j] = numList [j+1];
+        numList [j+1] = temp;
+        }
+        }
+        }
+        }
+        }
+        ```
+        Which of the following statements is false?
+
+        <answers>
+            <alternate>The method bubble does not return a value.</alternate>
+            <alternate>The method bubble has one argument which is an array of integers.</alternate>
+            <alternate correct='yes'>The method bubble cannot alter the order of elements in ``testList`` because methods cannot change their arguments.
+            </alternate>
+            <alternate>The two for loops in the method main are examples of for-each loops.</alternate>
+            <alternate>The method bubble would keep working even if the size of the array ``testList`` was changed.
+            </alternate>
+        </answers>
+    </question>
+        <question>
+
+            Why does the inner loop in bubble (the one with loop counter called ``j``) stop at  ``numberList.length-1``?
+
+
+            <answers>
+                <alternate>  An array is actually one element shorter than the value of ``length`` because it cant affect the order of the array.
+                </alternate>
+                <alternate> There is no need to look at the last element of the array ``numberList``.
+                </alternate>
+                <alternate correct='yes'> Sorting compares pairs of values and there are ``numberList.length1`` pairs to compare.
+                </alternate>
+                <alternate>A loop cannot iterate as many times as another loop that it is nested inside.</alternate>
+                <alternate> It is actually a mistake  it should be ``numberList.length``.
+                </alternate>
+            </answers>
+        </question>
+        <question>
+            A programmer rewrites the method bubble:
+            ```
+            public static void bubble(int[]numList){
+
+            boolean done = false;
+
+            while(!done){
+            done = true;
+            for(int j = 0; j  &lt; numList.length - 1; j++){
+            if (numList [j] >numList [j + 1]){
+            int temp = numList [j];
+            numList [j] = numList [j+1];
+            numList [j+1] = temp;
+            done = false;
+            }
+            }
+            }
+            }```
+            Why did they do this?
+
+            <answers>
+                <alternate correct='yes'>The old code always takes the worst-case amount of time even if the data is nearly sorted to start with, but the new code stops as soon as the data is sorted.
+                </alternate>
+                <alternate>The programmer just prefers the new code  its not actually better.</alternate>
+                <alternate>Its always better to use while loops with arrays when you can.</alternate>
+                <alternate>The old code had a variable i that wasnt really used except for counting the number of times the outer loop iterated and its better to get rid of it.
+                </alternate>
+                <alternate>The old code sorts the data so the smallest element is first; this version sorts it so the smallest element is last.
+                </alternate>
+
+            </answers>
+        </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>3</level><question>
+        The following code causes a compiler error
+        ```
+        int salary = 50000;
+        if (salary >40000)
+        double tax = salary * 0.4;
+        else
+        double tax = salary * 0.2;
+        System.out.println("Tax Paid: " + tax);
+        ```
+
+        One of the following statements is true:
+
+        <answers>
+            <alternate correct='yes'>The code does not compile because variable declarations are not allowed as the single statement in the body of an if statement that has no {..}.
+            </alternate>
+            <alternate>The code does not compile because tax is declared twice.</alternate>
+            <alternate> The code does not compile you cannot initialise a variable in java when you declare it using an expression  so e.g. ``double tax = salary * 0.4;`` contains * which is not allowed.
+            </alternate>
+            <alternate>The code does not compile because {} are missing from the if-else statement.</alternate>
+            <alternate>The code does not compile because the calculations of tax mix integers and doubles.</alternate>
+
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Consider the following two loops
+        ```
+        /* while loop */
+        int i = 0;
+        while (i  &lt; 10){
+        System.out.println("Square of " + i + " is " + i*i);
+        i++;
+        }
+
+        /* for loop */
+        for(int i = 0; i  &lt; 10; i++){
+        System.out.println("Square of " + i + " is " + i*i);
+        }
+        ```
+
+        Now consider the following statements:
+
+
+
+        1. The output of the loops is exactly the same.
+        1. The for loop is best practice because this particular loop will iterate a known number of times and for loops should be used in that case.
+        1. The while loop is best practice because this particular loop will iterate a known number of times and while loops should be used in that case.
+        1. You could take ANY program that used the while loop above and replace it with the for loop above and the program would still compile and work exactly the same.
+        1. Before you replace the while loop above with the for loop above in a program you need to check that the variable i is not used outside the while loop in the program because it would be out of scope and that would stop it compiling.
+
+        Which of the following combinations of the statements 1.-5. are ALL true?
+
+        <answers>
+            <alternate correct='yes'>1,2,5</alternate>
+            <alternate>1,3,4</alternate>
+            <alternate>1</alternate>
+            <alternate>5</alternate>
+            <alternate>2,4</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>3</level><question>
+        This question and the following one are about this code written by a programmer:
+        ```
+        public class Car {
+        private String make; //company that makes the car
+        private String colour;
+        private boolean isElectric; //True if electric powered
+
+        public Car(String m, String c, boolean e){
+        make = m;
+        colour = c;
+        isElectric = e;
+        }
+        }
+        ```
+        Now the programmer wants to create two car objects: one for a cherry-red-coloured Ford, with non-electric
+        (petrol, diesel, LPG) engine, and one
+        for a lime-green-coloured Toyota with an electric engine. Which of the following describes what they should
+        do?
+
+
+        <answers>
+            <alternate>They cannot do this  there is only one variable for each of the three pieces of data about each  car, so they can only create an object for one of the two cars.
+            </alternate>
+            <alternate> Write the line
+                ```
+                Car cars = new Car("Ford", "cherry-red", false,
+                "Toyota","lime-green", true);
+                ```
+            </alternate>
+            <alternate>  Write the lines
+                ```
+                Car ford = new Car("Ford","cherry-red", "not electric");
+                Car toyota = new Car("Toyota","lime-green", "electric");
+                ```
+            </alternate>
+            <alternate> Write the lines
+                ```
+                Car ford = new Car("Ford","cherry-red",true);
+                Car toyota = new Car("Toyota","lime-green", false);
+                ```
+            </alternate>
+            <alternate correct='yes'> Write the lines
+                ```
+                Car ford = new Car("Ford","cherry-red",false);
+                Car toyota = new Car("Toyota","lime-green", true);
+                ```
+            </alternate>
+
+        </answers>
+    </question>
+        <question>
+            The programmer now decides they need to print out the colour of each car.
+            Which of the following describes what they should do?
+
+
+            <answers>
+                <alternate>They cannot do this because they can only store one value at a time in the colour variable.
+                </alternate>
+                <alternate> They need to write the following lines:
+                    ```
+                    System.out.println("Ford".colour);
+                    System.out.println("Toyota".colour);
+                    ```
+                </alternate>
+                <alternate> They need to write the following lines:
+                    ```
+                    System.out.println(ford.colour);
+                    System.out.println(toyota.colour);
+                    ```
+                </alternate>
+                <alternate correct='yes'> They cannot do this with their existing code  first they need to write a ``getColour()`` method.
+                </alternate>
+                <alternate> They need to write the following lines:
+                    ```
+                    System.out.println(Car("Ford").colour);
+                    System.out.println(Car("Toyota").colour);
+                    ```
+                </alternate>
+            </answers>
+        </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        Comments are a way to insert text into code to help make it more readable.
+        Which of the following describes the best strategy for commenting code and, in general, making it more
+        readable?
+
+
+        <answers>
+            <alternate>You should try to make the code as readable as possible and then comment each line to explain what it does.
+            </alternate>
+            <alternate correct='yes'>You should try to make the code as readable as possible and then add comments to explain what each logical block of code does; explain any code that you found tricky to write; explain the role of any variable which you cannot make obvious by carefully choosing its name.
+            </alternate>
+            <alternate>You do not need to make the code readable as you should just add comments to every line to explain what it means.
+            </alternate>
+            <alternate>Comments are only used when learning to program  as soon as you can program well, you should stop using them.
+            </alternate>
+            <alternate>Commenting your code and making it readable both make it easier for others to steal your intellectual property  you should make your code and comments hard to understand.
+            </alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>1</level><question>
+        Which of the following statements about loops in Java is false?
+
+        <answers>
+            <alternate>It is good practice to make sure loops exit only in one place and avoid the use of break and continue statements.
+            </alternate>
+            <alternate correct='yes'>It is good practice to write infinite loops in Java using while(true) and then use break statements to exit the loop.
+            </alternate>
+            <alternate>Nested loops are when one (or more) loops appears inside each other.</alternate>
+            <alternate>The code in the body of a loop in Java should be indented to make it easier for programmers to read.
+            </alternate>
+            <alternate>If the code in the body of a loop in Java is only one line long, you usually do not need to use {..} but it is good practice to do so.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        In Java, what is an identifier?
+
+        <answers>
+            <alternate>The name of the program.</alternate>
+            <alternate> The term used for the part in brackets after an if, while etc.  e.g. in ``if(A) A`` is the identifier.
+            </alternate>
+            <alternate>It is an alternative term for reserved words like if, while etc.</alternate>
+            <alternate correct='yes'>Any name chosen by some programmer representing a class, variable, method etc.
+            </alternate>
+            <alternate>A more formal way of saying variable.</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following statements about classes in Java is false?
+
+        <answers>
+            <alternate>You should always make variables in classes private and look up/set them using methods.
+            </alternate>
+            <alternate correct='yes'>You should always make variables in classes public and not write methods to look up/set them.
+            </alternate>
+            <alternate>If you dont write a constructor you automatically get one which has no arguments.</alternate>
+            <alternate>It is good practice that methods that look up the value of variables should have names starting with get.
+            </alternate>
+            <alternate>It is good practice that methods that set the value of variables should have names starting with set.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Here is a method declaration in Java:
+        ```
+        /*1 2                     3   4     5   6*/
+        int greatestCommonDivisor(int num1, int num2)
+        ```
+        The numbers 1-6 in the comment above the declaration label the elements below them. Which of the following
+        statements is true?
+
+
+        <answers>
+            <alternate>1 is the return type; 2 is the name; 3, 4, 5, and 6 are the parameters.</alternate>
+            <alternate>1 is the return type; 2 is the name; 3 and 5 are the names of the parameters; 4 and 6 are the types of the parameters.
+            </alternate>
+            <alternate>1 is the parameter; 2 is the name; 3, 4, 5, and 6 are the return types.</alternate>
+            <alternate correct='yes'>1 is the return type; 2 is the name; 3 and 5 are the types of the parameters; and 4 and 6 are the names of the parameters.
+            </alternate>
+            <alternate>1 is the return type; 2 is the parameter; 3, 4, 5 and 6 are the types of the parameters.
+            </alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        An array is a good choice to store a list of data when:
+
+        <answers>
+            <alternate>You might have to add new items in the middle of the list, not just at the end.</alternate>
+            <alternate>You might have to remove items from the middle of the list, not just at the end.</alternate>
+            <alternate>You dont know the maximum number of items you might have.</alternate>
+            <alternate>You need to store a mixture of different kinds of data (e.g. int, String, double).</alternate>
+            <alternate correct='yes'>You know in advance how many items there will be and will not have to change the order.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+
+        Which of the following statements correctly declares a variable and creates an object of the class
+        ``Planet``
+        ?
+
+
+        <answers>
+            <alternate>
+                ``mars = new Planet();``
+            </alternate>
+            <alternate>
+                ``mars = Planet();``
+            </alternate>
+            <alternate>
+                ``Planet mars = Planet();``
+            </alternate>
+            <alternate correct='yes'>
+                ``Planet mars = new Planet();``
+            </alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of these statements about methods is false?
+
+        <answers>
+            <alternate>More than one method in a class in Java can have the same name provided they have different numbers and/or types of parameters.
+            </alternate>
+            <alternate>The code in a method in Java cannot change the value of a parameter that is passed to it, but it can change the value of data that is referred to by a parameter.
+            </alternate>
+            <alternate correct='yes'>If a method returns a value, it must also store the value that it returns in a named variable before it does so.
+            </alternate>
+            <alternate>There is no limit on the number of parameters a method in Java can have.</alternate>
+            <alternate>The reserved word void is used in Java to indicate a method does not return a value.</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Suppose you have the following code:
+        ```
+        public class Test {
+        public static void main(String args[]) {
+        System.out.println(args[0]+" "+args.length);
+        }
+        }
+        ```
+        When you run this from the command line by typing java Test lemons are my favourite fruit two of the following are printed out.
+
+        1. java
+        1. test
+        1. lemons
+        1. 7
+        1. 6
+        1. 5
+
+        Which two are printed?
+
+        <answers>
+            <alternate>1 and 4</alternate>
+            <alternate correct='yes'>3 and 6</alternate>
+            <alternate>2 and 6</alternate>
+            <alternate>1 and 5</alternate>
+            <alternate>3 and 4</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        The next four questions (including this one) are about the following two classes Book1 and Book2
+        ```
+        public class Book1 {
+        public String author;
+        public String title;
+        public int year;
+        }
+
+        public class Book2 {
+        /* 1 */
+        private String author;
+        private String title;
+        private int year;
+
+        /* 2 */
+        public Book2(String a, String t, int y){
+        author = a;
+        title = t;
+        setYear(y);
+        }
+
+        /* 3 */
+        public String getAuthor(){
+        return author;
+        }
+
+        /* 4 */
+        public int getYear(){
+        return year;
+        }
+
+        /* 5 */
+        public void setYear(int year){
+        if(year > 0){
+        this.year = year;
+        } else {
+        this.year = CURRENT_YEAR; //assume this constant exists
+        }
+        }
+        }
+        ```
+        Which of the following statements is true?
+
+
+        <answers>
+            <alternate>``Book1`` is better than ``Book2`` because its much shorter.
+            </alternate>
+            <alternate> The problem with classes like ``Book1`` and ``Book2`` is that you can only have data for one book in your program.
+            </alternate>
+            <alternate>``Book2`` is better because you can change anything and any code that uses ``Book2`` will still work.
+            </alternate>
+            <alternate>``Book2`` will work just as well if you change all the reserved words public to private.
+            </alternate>
+            <alternate correct='yes'> You need to keep the public parts of ``Book2`` unchanged or code that uses ``Book2`` will stop working, but you can change anything else.
+            </alternate>
+        </answers>
+    </question>
+        <question>
+
+            Each main part of Book2 is labelled by a letter from ``/* 1 */`` to ``/*5 */`` in a comment. Which of the following statements are correct?
+
+
+            <answers>
+                <alternate>1 labels the private fields or variables; 2 labels the setup method; 3 and 4 label getters; 5 labels a setter.
+                </alternate>
+                <alternate correct='yes'>1 labels the private fields or variables; 2 labels the constructor; 3 and 4 label getters; 5 labels a setter.
+                </alternate>
+                <alternate>1 labels the constants; 2 labels the constructor; 3 and 4 label getters; 5 labels a setter.
+                </alternate>
+                <alternate>1 labels the private fields; 2 labels a constant; 3 and 4 label getters; 5 labels a setter.
+                </alternate>
+                <alternate>1 labels the private fields; 2 labels the constructor; 3, 4 and 5 label private methods.
+                </alternate>
+
+            </answers>
+        </question>
+        <question>
+            There is a method for setting the year for a book in Book2, but not for setting the title or author.
+            Which of the following statements is the most likely reason for this?
+
+
+            <answers>
+                <alternate>There is no reason - its just something the programmer decided to do.</alternate>
+                <alternate correct='yes'>The programmer decided that some basic data validation was needed for the year of publication to stop it being set to a negative value.
+                </alternate>
+                <alternate>Mistakes are never made with the author or title when creating ``Book2`` objects. But the year is often wrong so there needs to be a way to change it.
+                </alternate>
+                <alternate>Java requires you to have methods to set integers but not strings.</alternate>
+                <alternate>There are two strings and only one integer in ``Book2``, so Java would not be able to tell the difference between two methods to set Strings.
+                </alternate>
+
+            </answers>
+        </question>
+        <question>
+
+            A programmer writes the following code using ``Book2``
+
+            ```
+            Book2 greekEpic = new Book2("Nikos Kazantzakis", "Zorba the Greek", 1946);
+            Book2 americanEpic = new Book2("To Kill a Mockingbird", "Harper Lee", 1960);
+            Book2 russianEpic = new Book2("War and Peace", "Leo Tolstoy", 1969);
+            ```
+            Which of the following is not allowed?
+
+            <answers>
+                <alternate>``russianEpic.setYear(1869);``
+                </alternate>
+                <alternate>``System.out.println(americanEpic.getAuthor());``
+                </alternate>
+                <alternate correct='yes'>``System.out.println(greekEpic.title);``
+                </alternate>
+                <alternate>``americanEpic = new Book2("Go Set a Watchman", "Harper Lee", 2016);``
+                </alternate>
+                <alternate>``int year = greekEpic.getYear();``
+                </alternate>
+            </answers>
+        </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Java programs start by executing a main method. Which of the following is the correct definition of the main
+        method?
+
+
+        <answers>
+            <alternate>``public static void Main()``
+            </alternate>
+            <alternate>``public static void main()``
+            </alternate>
+            <alternate>``public static void Main(String args)``
+            </alternate>
+            <alternate>``public void main(String[] args)``
+            </alternate>
+            <alternate correct='yes'>``public static void main(String[] args)``
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following describes an object?
+
+        <answers>
+            <alternate>An object is what classes are instantiated from</alternate>
+            <alternate correct='yes'>An object is an instance of a class</alternate>
+            <alternate>An object is a variable</alternate>
+            <alternate>An object is a reference to an attribute</alternate>
+            <alternate>An object is not an instance of a class.</alternate>
+
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+    <!-- DUBIOUS -->
+
+    <block><level>2</level><question>
+        Given the code
+        ```
+        String s1 = "yes";
+        String s2 = s1;
+        String s3 = new String (s1);
+        ```
+        Which of the following is true?
+
+        <answers>
+            <alternate correct='yes'>``s1 == s2``
+            </alternate>
+            <alternate>``s1 = s2``
+            </alternate>
+            <alternate>``s3 == s1``
+            </alternate>
+            <alternate>``s3 = s1``
+            </alternate>
+            <alternate>``s1 != s2``
+            </alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What will be the result of attempting to compile the following program?
+        ```
+        public class SomeClass {
+        int value;
+
+        public SomeClass(int param){
+        value = param; /* 1 */
+        }
+
+        public static void main(String[] args) {
+        SomeClass a;
+        SomeClass b;
+
+        a = new SomeClass (); /* 2 */
+        b = new SomeClass (5); /* 3 */
+        }
+        }
+        ```
+        <answers>
+            <alternate>A compilation error will occur at ``/* 1 */`` since constructors cannot specify a return value
+            </alternate>
+            <alternate correct='yes'>A compilation error will occur at ``/* 2 */`` since the class does not have a default constructor
+            </alternate>
+            <alternate>A compilation error will occur at ``/* 3 */`` since the class does not have a constructor which takes one argument of type ``int``
+            </alternate>
+            <alternate>The program will compile correctly</alternate>
+            <alternate>The program will compile and execute correctly.</alternate>
+
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        After the following code has run, what is the value of grade when the value of score is 80?
+        ```
+        if (score >= 70) {
+        grade = "First";
+        }
+        if (score >= 60) {
+        grade = "2:1";
+        }
+        if (score >= 50) {
+        grade = "2:2";
+        }
+        if (score >= 40) {
+        grade = "Pass";
+        } else {
+        grade = "Fail";
+        }
+        ```
+        <answers>
+            <alternate>First</alternate>
+            <alternate>2:1</alternate>
+            <alternate>2:2</alternate>
+            <alternate correct='yes'>Pass</alternate>
+            <alternate>Fail</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Which of the following is a legal array declaration?
+
+        <answers>
+            <alternate>``int[] list = {"1", "2", "3"};``
+            </alternate>
+            <alternate>``int list = {1, 2, 3};``
+            </alternate>
+            <alternate>``int list = {1, 2, 3}[];``
+            </alternate>
+            <alternate>``int[] list[] = {1, 2, 3};``
+            </alternate>
+            <alternate correct='yes'>``int[] list = {1, 2, 3};``
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        A programmer is asked to write a program to do the following
+
+        - iterate through the integers 1 to 100
+        - if a number is divisible by 3 (and not 5) print "fizz"
+        - if a number is divisible by 5 (and not 3) print "buzz"
+        - if a number is divisible by both 3 and 5 print "fizzbuzz"
+
+        They write the following code
+        ```
+        for(int i = 1; i &lt;= 100; i++){
+        System.out.print(i + " ");
+        if (i % 3 == 0){
+        System.out.print("fizz");
+        } else if(i % 5 == 0){
+        System.out.print("buzz");
+        } else if (i % 3 == 0 &amp;&amp; i % 5 == 0){
+        System.out.print("fizzbuzz");
+        }
+        System.out.println();
+        }```
+        But their code never prints "fizzbuzz". What is the reason?
+
+        <answers>
+            <alternate>They should use a while or for-each loop, not a for loop..</alternate>
+            <alternate>They need to bracket the condition ``(i % 3 == 0 &amp;&amp; i % 5 == 0)`` like this ``((i % 3 == 0) &amp;&amp; (i % 5 == 0)){`` or it will never be true.
+            </alternate>
+            <alternate>They need to check for "fizzbuzz" first because its the most complex condition, and they always need to be checked first.
+            </alternate>
+            <alternate correct='yes'>They need to check for "fizzbuzz" first because if its condition is true, one of  the other ones will also be true.
+            </alternate>
+            <alternate>The condition for "fizzbuzz" should be ``(i % 3 == 0 || i % 5 == 0)``
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following should you use to compare strings in Java?
+
+        <answers>
+            <alternate>``==``
+            </alternate>
+            <alternate>``=``
+            </alternate>
+            <alternate>``equal()``
+            </alternate>
+            <alternate correct='yes'>``equals()``
+            </alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Consider the following code and choose from the answers the statement that is correct.
+        ```
+        int sum = 0;
+        for(int i = 1; i  &lt; 19; i+=2) {
+        sum += i;
+        }
+        ```
+        <answers>
+            <alternate>For loops cannot add more than one to a loop counter variable so ``i+=2`` is wrong.
+            </alternate>
+            <alternate>The loop calculates the sum of numbers up to and including 19.</alternate>
+            <alternate>The loop calculates the sum of odd numbers up to and including 19.</alternate>
+            <alternate correct='yes'>The loop calculates the sum of odd numbers up to but not including 19.</alternate>
+            <alternate>This should be written as a while loop not a for loop.</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        The following code does not compile - why not?
+        ```
+        public class SomeClass {
+        int x;
+
+        public static void someMethod() {
+        x = 0;
+        }
+        }
+        ```
+        <answers>
+            <alternate>You cannot have single letter variable names in Java so ``x`` is not allowed.
+            </alternate>
+            <alternate>The method ``someMethod`` should not be public.
+            </alternate>
+            <alternate correct='yes'>The static method ``someMethod`` can't access the non-static variable ``x `` because an instance of ``x`` does not exist yet.
+            </alternate>
+            <alternate>The variable ``x`` should be made private, and a public set method called ``setX`` should be written, and ``someMethod`` should call that.
+            </alternate>
+            <alternate>Because ``x`` is not public, it isn't visible to the public method ``someMethod``
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+    <block><level>2</level><question>
+        What does the following code print:
+        ```
+        int array[] = new int[5];
+        System.out.println(array);
+        ```
+        <answers>
+            <alternate>0</alternate>
+            <alternate>5</alternate>
+            <alternate>Whatever is stored in ``array[0]``
+            </alternate>
+            <alternate correct='yes'>Some value that contains the hashcode of the array</alternate>
+            <alternate>An error</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What does the following code print:
+        ```
+        int g = 3;
+        System.out.print(g++ * 8 + " " + g);
+        ```
+        <answers>
+            <alternate correct='yes'>24 4</alternate>
+            <alternate>32 4</alternate>
+            <alternate>24 3</alternate>
+            <alternate>32 3</alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What is the output of the following Java program?
+        ```
+        public class Test {
+        private int a;
+        private static int b;
+
+        public void setA(int aVal){
+        a = aVal;
+        }
+
+        public int getA(){
+        return a;
+        }
+
+        public void setB(int bVal){
+        b = bVal;
+        }
+
+        public int getB(){
+        return b;
+        }
+
+        public static void main(String[] args) {
+        Test firstObj = new Test();
+        firstObj.setA(10);
+        firstObj.setB(20);
+
+        Test secondObj = new Test();
+        secondObj.setA(5);
+        secondObj.setB(15);
+
+        System.out.println(firstObj.getA() + " " + firstObj.getB());
+        System.out.println(secondObj.getA() + " " + secondObj.getB());
+        }
+        }
+        ```
+        <answers>
+            <alternate>
+                ```
+                10 20
+                10 20
+                ```
+            </alternate>
+            <alternate>
+                ```
+                10 20
+                5 15
+                ```
+            </alternate>
+            <alternate>
+                ```
+                5 15
+                5 15
+                ```
+            </alternate>
+            <alternate correct='yes'>
+                ```
+                10 15
+                5 15
+                ```
+            </alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What is the output of the following Java program?
+        ```
+        public class Test{
+        public static void main(String[] args){
+        int val = 40;
+        if(val == 30 &amp;&amp; val/0 == 4) { /* 1 */
+        System.out.println("no");
+        } else {
+        System.out.println("yes");
+        }
+        }
+        }
+        ```
+        <answers>
+            <alternate correct='yes'>yes</alternate>
+            <alternate>no</alternate>
+            <alternate>Compiler error - the line ``/* 1 */`` should be ``if((val == 30) &amp;&amp; (val/0 == 4))``
+            </alternate>
+            <alternate>A divide by zero error on line ``/* 1 */``
+            </alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What is the result of running the following Java program?
+        ```
+        public class Test {
+        static final int TOTAL = 0;
+
+        public static void main(String[] args) {
+        for(int i = 0; i  &lt; 10; i++) {
+        TOTAL += i;
+        }
+        System.out.println(TOTAL);
+        }
+        }
+        ```
+        <answers>
+            <alternate>45</alternate>
+            <alternate>10</alternate>
+            <alternate correct='yes'>Compiler error</alternate>
+            <alternate>0</alternate>
+            <alternate>None of these.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        The following Java program does not compile. Which of the statements below most accurately describe what you
+        would need to do to fix this?
+        ```
+        public class Test
+        {
+        int value = 1;
+
+        public static void main(String[] args) {
+
+        for(int i = 1; i &lt;= 10; i++){
+        value *= i;
+        }
+        System.out.println(value);
+
+        }
+        }
+        ```
+        <answers>
+            <alternate>The only possible solution is to add the reserved word ``static`` at the start of  ``int value = 1;``
+            </alternate>
+            <alternate>There is no ``*=`` operator, so ``value *= i;`` needs to be replaced by ``value = value * i;``
+            </alternate>
+            <alternate>The only possible solution is to move the line ``int value = 1;`` inside the ``main`` method.
+            </alternate>
+            <alternate correct='yes'>*Either* add the reserved word ``static`` at the start of ``int value = 1;``, *or* move the line ``int value = 1;`` inside the ``main`` method.
+            </alternate>
+            <alternate>You need to change the for loop to ``for(int i = 0; i &lt; 10; i++)``.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What is the result of running the following Java program?
+        ```
+        public class Test {
+
+        public static String doubleIt(String val) {
+        return val + val;
+        }
+
+        public static String doubleIt(int val) {
+        return Integer.toString(val) + val;
+        }
+
+        public static void main(String[] args) {
+        System.out.println(doubleIt(doubleIt(5)));
+
+        }
+        }
+        ```
+        <answers>
+            <alternate>20</alternate>
+            <alternate correct='yes'>5555</alternate>
+            <alternate>Compiler error - there are two methods called ``doubleIt``
+            </alternate>
+            <alternate>1010</alternate>
+            <alternate>Compiler error - ``doubleIt`` expects a ``String`` parameter and 5 is an ``int``
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        This question and the following two are about this class:
+        ```
+        public class CouldBeCitrus {
+
+        private final String name;
+        private final boolean citrus;
+
+        public CouldBeCitrus(String name, boolean citrus){
+        this.name = name;
+        this.citrus = citrus;
+        }
+
+        public String getName(){
+        return name;
+        }
+        }
+        ```
+        Which of the following statements about '``this``' is true?
+
+
+        <answers>
+            <alternate>It is ignored by Java, but is included to help make programs more readable.</alternate>
+            <alternate correct='yes'>It means 'the current object'.</alternate>
+            <alternate>It must always be used when writing assignment statements in constructors.</alternate>
+            <alternate>In methods and constructors, when the same name is used for a variable and a parameter, it makes it clear that the parameter is the one being referred to.
+            </alternate>
+            <alternate>It is only necessary when assigning to variables that are ``private``.
+            </alternate>
+        </answers>
+    </question>
+        <question>
+            Currently there is no method to give access to the value of the
+            ``boolean``
+            ``citrus``
+            -
+            a programmer comes up with these two alternatives:
+            ```
+            public boolean isCitrus(){
+            return citrus;
+            }
+
+            public String isCitrus(){
+            if (citrus){
+            return "yes " + name + " is a citrus fruit";
+            } else {
+            return "no " + name + " is not a citrus fruit";
+            }
+            }
+            ```
+            <answers>
+                <alternate>The first one is better because shorter code is always better.</alternate>
+                <alternate>The second one is better because it gives more information to the user.</alternate>
+                <alternate>The second one is better because it's more readable.</alternate>
+                <alternate>There's no reason to prefer one to the other.</alternate>
+                <alternate correct='yes'>The first one is better because it does not make assumptions about what the result will be used for.
+                </alternate>
+            </answers>
+        </question>
+        <question>
+            Which of the following statements about ``CouldBeCitrus`` is false?
+
+
+            <answers>
+                <alternate>Because Java 'knows' that objects of the ``CouldBeCitrus`` class cannot change, it can generate better code.
+                </alternate>
+                <alternate>If you write set methods, you would need to remove the ``final`` reserved word from the two variables.
+                </alternate>
+                <alternate correct='yes'>Because they are ``final`` the two variables are automatically not accessible outside the class ``CouldBeCitrus``, so there is no need to also make them ``private``.
+                </alternate>
+                <alternate>Final variables are sometimes in uppercase, but normally only when they are also ``static``.
+                </alternate>
+                <alternate>Because we've written a constructor, Java no longer automatically generates the no-argument constructor for us.
+                </alternate>
+            </answers>
+        </question></block>
+
+    <!-- ***Question Block***-->
+    <!-- New for 2019/20 -->
+
+    <block><level>2</level><question>
+        The following code does not compile - why?
+        ```
+        class Fails {
+        String testing = "testing";
+
+        public static void main(String[] args) {
+        System.out.println(testing);
+        }
+        }
+        ```
+        <answers>
+            <alternate>The class ``Fails`` must be public.
+            </alternate>
+            <alternate>It is impossible to tell unless you know the name of the file that Fails is saved in.</alternate>
+            <alternate>The String ``testing`` should be private.
+            </alternate>
+            <alternate correct='yes'>The String ``testing`` should be static.
+            </alternate>
+            <alternate>The String ``testing`` should be public.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        A programmer writes the following code to encrypt text using a simple Caesar cypher with a key of 5, but
+        finds all the letters turn into numbers. Why is this?
+        ```
+        char m = msg.charAt(x); //String is called msg and x is a loop counter
+        char c = (m+5);
+        if (c > 'z'){
+        c -= 26;
+        }
+        ```
+        <answers>
+            <alternate correct='yes'>When you perform arithmetic on characters in Java, they do turn into numbers and you must use a *cast* to convert them back.
+            </alternate>
+            <alternate>This is actually correct and once decoded the numbers will revert to the correct letters.
+            </alternate>
+            <alternate>The problem is that you cannot use operators like '``-=``' on characters in Java.
+            </alternate>
+            <alternate>Once you have performed arithmetic on numbers in Java, you must add 'a' or the character code for 'a' to them to turn them back into letters.
+            </alternate>
+            <alternate>They are characters not numbers so you are not supposed to perform arithmetic on them and the results will always be unpredictable numbers.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        What does the following code print? *Read it carefully.*
+        ```
+        int finalVal = 0;
+        for(int i = 0; i  &lt; 10; i++);{
+        finalVal++;
+        }
+        System.out.println(finalVal);
+        ```
+        <answers>
+            <alternate>10</alternate>
+            <alternate correct='yes'>1</alternate>
+            <alternate>9</alternate>
+            <alternate>11</alternate>
+            <alternate>0</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Which of the following statements about constructors is false?
+
+        <answers>
+            <alternate correct='yes'>Constructors must have a return type.</alternate>
+            <alternate>Constructors can have parameters.</alternate>
+            <alternate>There can be more than one constructor in a class.</alternate>
+            <alternate>Constructors can be private.</alternate>
+            <alternate>Constructors can call methods.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Which of the following statements about methods is false?
+
+        <answers>
+            <alternate>You can have more than one method with the same name provided they have different numbers or types of parameters.
+            </alternate>
+            <alternate>You can write a method that has the same name as one that is already present in a Java library (e.g. could write a method called ``println``).
+            </alternate>
+            <alternate>Methods which have a return type of ``void`` can still have ``return`` statements.
+            </alternate>
+            <alternate correct='yes'>If a method returns a value (i.e. it is not ``void``) then that method must be assigned to a variable.
+            </alternate>
+            <alternate>Methods may have no parameters.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        A programmer writes the following code as an experiment using their fast desktop workstation - it just
+        creates a string containing "a" and then adds "a" to that a million times. To their surprise, the code
+        takes a very long time to run. Why is this?
+        ```
+        String x = "a";
+        for(int i = 0; i  &lt; 1000000;i++){
+        x += "a";
+        }
+        ```
+        <answers>
+            <alternate>You cannot expect a million operations to be that quick - this is just normal.</alternate>
+            <alternate>The ``+=`` operation applied to Strings is slow in Java and it would be fine if written ``x = x +"a";``
+            </alternate>
+            <alternate correct='yes'>Strings are never changed in Java once created, so an operation like ``x += "a"; `` creates a new String object for every operation, which is computationally very expensive.
+            </alternate>
+            <alternate>It has nothing to do with the String - a million is too large a number for normal arithmetic in Java, so it uses a special library operation for this which can handle very large numbers but is very slow.
+            </alternate>
+            <alternate>It's because Java is not a fully compiled language and if they had used, say, C++ it would be much quicker.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+    <block><level>2</level><question>
+        Which of the following is not a Java reserved word?
+
+        <answers>
+            <alternate>class</alternate>
+            <alternate>public</alternate>
+            <alternate>static</alternate>
+            <alternate>void</alternate>
+            <alternate correct='yes'>main</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What does the following code print?
+        ```
+        public class Lemon {
+        private String lemon;
+
+        public String getLemon(){
+        return lemon;
+        }
+
+        public void setLemon(String val){
+        lemon = val;
+        }
+
+
+        public static void main(String[] args) {
+        Lemon fruit1 = new Lemon();
+        fruit1.setLemon("something citrus");
+        Lemon fruit2 = fruit1;
+        System.out.println(fruit1.getLemon() + ":" + fruit2.getLemon());
+        fruit2.setLemon("an apple maybe");
+        System.out.println(fruit1.getLemon() + ":" + fruit2.getLemon());
+        }
+        }
+        ```
+        <answers>
+            <alternate>You cannot put a ``main`` method inside a class and then create an object of that class so it doesn't actually compile.
+            </alternate>
+            <alternate>It prints "``something citrus:something citrus``" and "``something citrus:an apple maybe``".
+            </alternate>
+            <alternate>It prints "``something citrus:null``" and "``something citrus:an apple maybe``".
+            </alternate>
+            <alternate>It prints "``something citrus:null``" and "``null:an apple maybe``".
+            </alternate>
+            <alternate correct='yes'>It prints "``something citrus:something citrus``" and "``an apple maybe:an apple maybe``".
+            </alternate>
+        </answers>
+    </question></block>
+
+    <block><level>2</level><question>
+        What would be the behaviour in Java if a constructor had a return type?
+
+        <answers>
+            <alternate correct="yes">compiler error</alternate>
+            <alternate>runtime error</alternate>
+            <alternate>compiles and run successfully</alternate>
+            <alternate>only simple return types like int, double, boolean etc. can be returned - not objects</alternate>
+            <alternate>only objects are allowed as return type - not simple types like int, double boolean etc.
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following statements is false?
+
+        <answers>
+            <alternate>the public reserved word when applied to an element inside a class means that element is accessible from outside the class
+            </alternate>
+            <alternate>the private reserved word when applied to an element inside a class means that element is not accessible from outside the class
+            </alternate>
+            <alternate correct="yes">if you do not use either private or public then an element of a class is assumed to be private
+            </alternate>
+            <alternate>it is very bad practice to not make fields in a class private (with the possible exception of static final ones)
+            </alternate>
+            <alternate>methods in a class can be either public or private, and the choice would depend on where you want those methods to be accessible from
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following statements about constructors is false?
+
+        <answers>
+            <alternate>constructors can be private</alternate>
+            <alternate>if you do not write a constructor, one with no arguments will be created for you</alternate>
+            <alternate>you can have more than one constructor in a class</alternate>
+            <alternate correct="yes">constructors cannot assign values to final variables</alternate>
+            <alternate>if you write a constructor then one with no arguments will NOT be created for you</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the following statements is true after this code is executed? You can assume that setColor simply
+        stores the value passed as
+        an argument.
+        ```
+        Thing a = new Thing();
+        a.setColor("blue");
+        Thing b = a;
+        b.setColor("red");
+        ```
+        <answers>
+            <alternate>the color of a is blue and the color of b is red</alternate>
+            <alternate correct="yes">the color of both a and b is red</alternate>
+            <alternate>the color of both a and b is blue</alternate>
+            <alternate>the code won't compile because b does not refer to an object</alternate>
+            <alternate>the code will compile but won't run because b does not refer to an object</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        In Java, what are the members of a class?
+
+        <answers>
+            <alternate>all the variables in a class</alternate>
+            <alternate>all the non-static variables in a class</alternate>
+            <alternate correct="yes">everything in a class - variables, methods, constructors etc.</alternate>
+            <alternate>the methods in a class</alternate>
+            <alternate>the constructors in a class</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Suppose there is a class called Thing and you attempt to call a method called myThing() like this:
+        ```
+        Thing.myThing();
+        ```
+        Which of the following is true?
+
+        <answers>
+            <alternate>this will not compile because you need to use an object not a class in front of the '.' when you call a method
+            </alternate>
+            <alternate>this will work but only if there is only a single object of class Thing because otherwise Java cannot tell which you intend to call
+            </alternate>
+            <alternate>this will work but will call the myThing() method for all objects of the class Thing that have been created at that point
+            </alternate>
+            <alternate>this will work provided that myThing() is not static</alternate>
+            <alternate correct="yes">this will work provided that myThing() is static</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Which of the statements is false?
+
+        <answers>
+            <alternate>Making the fields in a class public will not stop that class working</alternate>
+            <alternate>Making fields of a class public means programmers can exploit how your code works, making it difficult to update it in the future
+            </alternate>
+            <alternate>Making a field in a class final means that field can no longer have a set method</alternate>
+            <alternate correct="yes">Making a field in a class static AND final means that field must have a set method
+            </alternate>
+            <alternate>Making a field in a class private means that field can still be accessed via methods from inside that class
+            </alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        Suppose there is a class called Thing and you attempt to call a method called myThing() like this:
+        ```
+        myObject.myThing();
+        ```
+
+        where myObject is an object of class Thing
+        that you have created. Which of the following is true?
+
+
+        <answers>
+            <alternate>This will only work if the method myThing() is not static.</alternate>
+            <alternate>This will only work if the method myThing() is private.</alternate>
+            <alternate correct="yes">This will work if the method myThing() is public.</alternate>
+            <alternate>This will only work if myObject is not final.</alternate>
+            <alternate>This will only work if myObject is static.</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        The following code does not compile - how can you fix it?
+        ```
+        public class NoCompile {
+        private final int x;
+
+        public NoCompile(int y) {
+        setX(y);
+        }
+
+        public void setX(int y) {
+        x = y;
+        }
+        }
+        ```>
+        <answers>
+            <alternate>Make the variable x static</alternate>
+            <alternate>Remove the reserved word final from x</alternate>
+            <alternate>Directly assign assign the value of y to the variable x in the constructor,  and remove the setX() method
+            </alternate>
+            <alternate>Change the method setX() to return an int, and then assign the returned value to x
+            </alternate>
+            <alternate correct="yes">Any of the approaches in answers B, C and D will work.</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What will the output be of running the following Java code?
+        ```
+        int[] array = new int[10];
+        for(int i = 0; i  &lt; 10; i++) {
+        array[i] = i/2;
+        array[i]++;
+        System.out.print(array[i] + " ");
+        i++;
+        }
+        ```
+        <answers>
+            <alternate>0 2 4 6 8</alternate>
+            <alternate>1 3 5 7 9</alternate>
+            <alternate correct="yes">1 2 3 4 5</alternate>
+            <alternate>0 1 2 3 4 5 6 7 8 9</alternate>
+            <alternate>1 2 3 4 5 6 7 8 9 10</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What will the output be of running the following Java code?
+        ```
+        int[] array = {1, 2, 3, 4, 5};
+        for(int i = 0; i  &lt; array.length - 2; i++) {
+        System.out.print(array[i] + " ");
+        }
+        ```
+        <answers>
+            <alternate>1 2</alternate>
+            <alternate correct="yes">1 2 3</alternate>
+            <alternate>1 2 3 4</alternate>
+            <alternate>1 2 3 4 5</alternate>
+            <alternate>runtime error Array Index Out of Bounds</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What will the output be of running the following Java code?
+        ```
+        String s1 = "Hello";
+        String s2 = new String(s1);
+        String s3 = "HELLO";
+        System.out.println(s1.equals(s2) + " " + s2.equals(s3));
+        ```
+        <answers>
+            <alternate>true true</alternate>
+            <alternate>false false</alternate>
+            <alternate correct="yes">true false</alternate>
+            <alternate>false true</alternate>
+            <alternate>runtime error</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What will the output be of running the following Java code?
+        ```
+        String s1 = "Hello there!";
+        String s2 = "Hello";
+        String s3 = s1.substring(0, 5); //characters 0 (inclusive) to 5 (exclusive)
+        System.out.println((s2 == s3) + " " + s2.equals(s3));
+        ```
+        <answers>
+            <alternate>true true</alternate>
+            <alternate>false false</alternate>
+            <alternate>true false</alternate>
+            <alternate correct="yes">false true</alternate>
+            <alternate>runtime error</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        How many times will the following loop execute?
+        ```
+        int x=1;
+        int y=10;
+        int z=1;
+
+        do{
+        y--;
+        x++;
+        y-=2;
+        y=z;
+        z++;
+        } while (y > 1 &amp;&amp; z  &lt; 10);
+        ```
+        <answers>
+            <alternate>2</alternate>
+            <alternate>10</alternate>
+            <alternate>5</alternate>
+            <alternate correct="yes">1</alternate>
+            <alternate>the loop will not terminate</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        What is the output of the following Java code?
+        ```
+        static int i = 1;
+        public static void main(String args[]) {
+        System.out.print(i+",");
+        m(i);
+        System.out.print(i);
+        }
+
+        public static void m(int i) {
+        i += 2;
+        }
+        ```
+        <answers>
+            <alternate correct="yes">1, 1</alternate>
+            <alternate>3, 3</alternate>
+            <alternate>1, 3</alternate>
+            <alternate>runtime error</alternate>
+            <alternate>compiler error</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>1</level><question>
+        What is the output of the following code?
+        ```
+        int x = 5;
+        if (x &lt;  5); {
+        System.out.println("&lt; 5");
+        } else
+        System.out.println("not &lt;  5");
+        }
+        ```
+        <answers>
+            <alternate>&lt; 5</alternate>
+            <alternate>not  &lt;  5</alternate>
+            <alternate>both &lt; 5 and not &lt; 5</alternate>
+            <alternate correct="yes">it does not compile</alternate>
+            <alternate>it does not print anything</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>3</level><question>
+        Which of the statements below about the following code is true?
+        ```
+        public class Example {
+        private int a;
+
+        public Example(int a) {
+        this.a = a;
+        }
+
+        public int getA(){
+        return a;
+        }
+        }
+        ```
+        <answers>
+            <alternate>In the constructor this.a can be replaced by a</alternate>
+            <alternate correct="yes">In the method getA() a can be replaced by this.a</alternate>
+            <alternate>It is possible to change the value of the integer field a after an object of this class has been created
+            </alternate>
+            <alternate>The integer field a cannot be made final</alternate>
+            <alternate>The code will not compile because there is no set method for the integer field a</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>3</level><question>
+        Which of the statements below about the following code are false?
+        ```
+        public class Book {
+        private final String author;
+        private final String title;
+        private final int year;
+
+        public Book(String author, String title, int year) {
+        this.author = author;
+        this.title = title;
+        this.year = year;
+        }
+
+        public Book() {
+        }
+
+        public String getAuthor() {
+        return author;
+        }
+
+        public String getTitle() {
+        return title;
+        }
+
+        public int getYear() {
+        return year;
+        }
+        }
+        ```
+        <answers>
+            <alternate>The constructor with no arguments cannot be left out.</alternate>
+            <alternate correct="yes">The class can have set methods added for any of the fields.</alternate>
+            <alternate>The reserved word this in the constructor with arguments cannot be left out.</alternate>
+            <alternate>The reserved word this can be added to each of the fields referred to in the return statements of
+                the get methods.
+            </alternate>
+            <alternate>Making the fields of the class static would mean there could only be one book object.</alternate>
+        </answers>
+    </question></block>
+
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>3</level><question>
+        What is the output of the following code?
+        ```
+        public class Mystery {
+        public static void main(String[] args) {
+        Mystery2 mystery = new Mystery2(55);
+        System.out.println(mystery.x);
+        }
+        }
+
+        class Mystery2 {
+        private int x;
+
+        public Mystery2(int x) {
+        this.x = x * x;
+        }
+        }
+        ```
+        <answers>
+            <alternate>55</alternate>
+            <alternate correct="yes">Compiler error</alternate>
+            <alternate>3025</alternate>
+            <alternate>null</alternate>
+            <alternate>5</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>3</level><question>
+        What is the output of the following code?
+        ```
+        int Integer = 0;
+        String String = "string";
+        System.out.print(Integer);
+        System.out.print(String);
+        ```
+        <answers>
+            <alternate>It will print '0'</alternate>
+            <alternate>It will print 'string'</alternate>
+            <alternate>It will not compile because you cannot call variables Integer or String</alternate>
+            <alternate correct="yes">It will print '0string'</alternate>
+            <alternate>It will do none of the above</alternate>
+        </answers>
+    </question></block>
+
+    <!-- ***Question Block***-->
+
+
+    <block><level>2</level><question>
+        What is the result of running the following code?
+        ```
+        double x = 99/0;
+        ```
+        <answers>
+            <alternate>x will be set to the defined Java value NaN - Not a Number</alternate>
+            <alternate>x will contain 99</alternate>
+            <alternate>It will not compile</alternate>
+            <alternate>x will contain 0</alternate>
+            <alternate correct="yes">It will cause a runtime error</alternate>
+        </answers>
+    </question></block>
+</exam>
+
+
