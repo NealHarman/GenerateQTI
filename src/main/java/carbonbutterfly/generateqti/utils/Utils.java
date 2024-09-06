@@ -10,13 +10,14 @@ import java.util.List;
 public class Utils {
 
     public static final String PRE_AMBLE = """
-           Quiz title: CS-110 End of Module Quiz
+           Quiz title: CS-110 End of Module Class Test - MCQ Section
            Quiz description: <ul><li>Answer all the questions.</li>\
            <li>IF YOU COMMUNICATE WITH ANYONE OR ANYTHING IN ANYWAY YOU ARE COMMITTING ACADEMIC MISCONDUCT.</li>\
            <li>This includes talking and using any device other than the computer you use for the test.</li>\
            <li>The penalties for misconduct in exams/tests are MUCH more serious than for coursework and it is \
            perfectly possible to be WITHDRAWN FROM THE UNIVERSITY FOR A FIRST OFFENCE.</li>\
-           <li>You have 50 minutes to complete the quiz - plus any extra time you may be entitled to.</li>\
+           <li>You have 2 hours to complete this test and the programming test - you can choose how much time you spend
+           on each part.</li>\
            <li>By submitting you state that you fully understand and are complying with the University's \
            Academic Misconduct Policy.</li>\
            </ul>

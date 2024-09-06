@@ -1,10 +1,10 @@
 
 }
 java:S1118
-":Add a private constructor to hide the implicit public one.(¼Øûì8¥Ëììá1J$85326144-e545-42f1-8f18-9daa0bdc3593
+":Add a private constructor to hide the implicit public one.(¼Øûì8¥Ëììá1J$4a164688-c71d-4dcf-8409-fdfc3f7b18cf
 
-java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(µáÎüÿÿÿÿ8ñš¯ã1J$54106048-c951-433e-8235-30ec3a478e20
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(µáÎüÿÿÿÿ8ñš¯ã1J$2f898f20-2ab7-4ec3-9a35-6261be4eeebd
 
-java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(µáÎüÿÿÿÿ8óš¯ã1J$6b9ffd49-edab-4e58-a381-006de7067462
+java:S5361"HReplace this call to "replaceAll()" by a call to the "replace()" method.(µáÎüÿÿÿÿ8óš¯ã1J$28e27187-7196-4daf-93b8-f9685f5a6000
 h
-java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8›¯ã1J$9a7cc9e0-003e-4c5a-91cb-dcfbee5b9e0d
+java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8›¯ã1J$8d87d486-8d80-48c4-80cb-9f603ff229c8

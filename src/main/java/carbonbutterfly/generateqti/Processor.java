@@ -23,7 +23,7 @@ public class Processor {
     public static void main(String[] args) {
         final Processor processor = Processor.deSerializeQuestions("/Users/neal/Library/CloudStorage/OneDrive-SwanseaUniversity/Exams/WorkingBank.xml");
         processor.outputAllQuestions("/Users/neal/Library/CloudStorage/OneDrive-SwanseaUniversity/Exams/AllQuestions.txt");
-        int[] levelCount = {6,10,4};
+        int[] levelCount = {6,12,4};
         processor.generateQuiz("/Users/neal/Library/CloudStorage/OneDrive-SwanseaUniversity/Exams/SampleQuiz.txt", levelCount);
     }
 
