@@ -19,7 +19,8 @@ public class Utils {
            <li>You have 2 hours to complete this test and the programming test - you can choose how much time you spend
            on each part.</li>\
            <li>By submitting you state that you fully understand and are complying with the University's \
-           Academic Misconduct Policy.</li>\
+           <a href="https://myuni.swansea.ac.uk/academic-life/academic-misconduct/" target="_blank" rel="noopener">Academic Misconduct Policy</a> \
+           (opens in a new window/tab)</li>\
            </ul>
             """;
 
