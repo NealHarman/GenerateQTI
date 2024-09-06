@@ -10,7 +10,7 @@ import java.util.List;
 public class Utils {
 
     public static final String PRE_AMBLE = """
-           Quiz title: CS-110 End of Module Class Test - MCQ Section
+           Quiz title: CS-110 MCQ Class Test
            Quiz description: <ul><li>Answer all the questions.</li>\
            <li>IF YOU COMMUNICATE WITH ANYONE OR ANYTHING IN ANYWAY YOU ARE COMMITTING ACADEMIC MISCONDUCT.</li>\
            <li>This includes talking and using any device other than the computer you use for the test.</li>\
